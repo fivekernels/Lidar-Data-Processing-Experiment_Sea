@@ -3,10 +3,10 @@ classdef RawSeaData
     %   此处显示详细说明
     
     properties (Constant)
-        cloumn532Parallel = 2;                % 532nm平行通道数据 列
-        row532Parallel = [514 - 1, 2561 - 1]; % 532nm平行通道数据 行
-        cloumn532Crossl = 3;                  % 532nm平行通道数据 列
-        row532Cross = [5634 - 1, 7681 - 1];   % 532nm平行通道数据 行
+        parallel532_column = 2;                % 532nm平行通道数据 列
+        parallel532_row = [514 - 1, 2561 - 1]; % 532nm平行通道数据 行
+        crossl532_column = 3;                  % 532nm平行通道数据 列
+        cross532_row = [5634 - 1, 7681 - 1];   % 532nm平行通道数据 行
     end
     
     properties
@@ -69,10 +69,22 @@ classdef RawSeaData
             obj.fileFullName = strcat(filePath, fileName);
         end
         
-        function outputArg = method1(obj)
+        function [parallel532_Val, cross532_Val] = method1(obj)
             %METHOD1 此处显示有关此方法的摘要
             %   此处显示详细说明
-            outputArg = obj.importRawTxt();
+            rawDataTable = obj.importRawTxt();
+
+            % 提取水平 垂直数据
+            parallel532_Str = string( table2array( ...,
+                                       rawDataTable(obj.parallel532_row(1):obj.parallel532_row(2), ...,
+                                       obj.parallel532_column))' ...,
+                                    );
+            parallel532_Val = hex2dec(parallel532_Str);
+            cross532_Str = string( table2array( ...,
+                                       rawDataTable(obj.cross532_row(1):obj.cross532_row(2), ...,
+                                       obj.crossl532_column))' ...,
+                                    );
+            cross532_Val = hex2dec(cross532_Str);
         end
     end
 end
