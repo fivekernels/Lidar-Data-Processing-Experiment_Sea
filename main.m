@@ -48,3 +48,19 @@ if flagFileValued == 0 % 读取结果失败 读取源数据
     % disp(['运行时间: ',num2str(toc)]);
     save([resuleFilePath resulFileName], getVarName(totalParallel), getVarName(totalCross));
 end
+
+accSeaDataParallel = AccSeaData(totalParallel, 0.3);
+accSeaDataCross = AccSeaData(totalCross, 0.3);
+% % 原始信号
+% hold on;
+% plot(accSeaDataParallel.accDataValid);
+% plot(accSeaDataParallel.accDataValidSmooth);
+
+pZSquareDataParallel = accSeaDataParallel.CalPZSquare();
+pZSquareDataCross = accSeaDataCross.CalPZSquare();
+kLidarParallel = accSeaDataParallel.CalKLidar();
+kLidarCross = accSeaDataCross.CalKLidar();
+
+hold on;
+plot(kLidarParallel)
+plot(kLidarCross)
