@@ -51,16 +51,25 @@ end
 
 accSeaDataParallel = AccSeaData(totalParallel, 0.3);
 accSeaDataCross = AccSeaData(totalCross, 0.3);
-% % 原始信号
-% hold on;
-% plot(accSeaDataParallel.accDataValid);
-% plot(accSeaDataParallel.accDataValidSmooth);
+
+% 画原始信号
+semilogy(accSeaDataParallel.depth_arr, accSeaDataParallel.accData);
+hold on;
+semilogy(accSeaDataParallel.depthValid_arr, accSeaDataParallel.accDataValid);
+semilogy(accSeaDataParallel.depthValid_arr, accSeaDataParallel.accDataValidSmooth);
 
 pZSquareDataParallel = accSeaDataParallel.CalPZSquare();
 pZSquareDataCross = accSeaDataCross.CalPZSquare();
 kLidarParallel = accSeaDataParallel.CalKLidar();
 kLidarCross = accSeaDataCross.CalKLidar();
 
+% 画pz2
+semilogy(accSeaDataParallel.depthValid_arr(1:size(pZSquareDataParallel, 2)), pZSquareDataParallel);
 hold on;
-plot(kLidarParallel)
-plot(kLidarCross)
+% semilogy(accSeaDataCross.depthValid_arr(1:size(pZSquareDataCross, 2)), pZSquareDataCross);
+
+% 画klidar
+hold on;
+% plot(accSeaDataParallel.depthValid_arr(1:size(kLidarParallel, 2)), kLidarParallel)
+semilogy(accSeaDataParallel.depthValid_arr(1:size(kLidarParallel, 2)), kLidarParallel)
+% plot(accSeaDataCross.depthValid_arr(1:size(kLidarCross, 2)), kLidarCross)

@@ -28,7 +28,11 @@ classdef AccSeaData
         function pZSquare = CalPZSquare(obj)
             %pZSquare 计算距离平方矫正数据
             %   此处显示详细说明
-            pZSquare = obj.accDataValidSmooth .* obj.depthValid_arr.^2;
+            pZSquareAll = obj.accDataValidSmooth .* obj.depthValid_arr.^2;
+%             % 画全部pz2
+%             semilogy(obj.depthValid_arr, pZSquareAll);
+            [~, minIndex]=min(pZSquareAll);
+            pZSquare = pZSquareAll(1:minIndex);
         end
         
         function kLidar = CalKLidar(obj)
