@@ -69,7 +69,7 @@ classdef RawSeaData
             obj.fileFullName = strcat(filePath, fileName);
         end
         
-        function [parallel532_Val, cross532_Val] = method1(obj)
+        function [parallel532_Val, cross532_Val] = CalParaCross(obj)
             %METHOD1 此处显示有关此方法的摘要
             %   此处显示详细说明
             rawDataTable = obj.importRawTxt();
